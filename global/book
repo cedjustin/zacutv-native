@@ -1,0 +1,95 @@
+<ImageBackground
+                        source={{uri:this.state.rootUrl+'/uploads/posts/'+this.state.data.image}}
+                        style={styles.image_top}
+                        alt='image'
+                    >
+                        <View style={styles.image_overlay}>
+                            {/* <View style={{height:'70%'}}></View> */}
+                            <View style={styles.fac}>
+                                <View style={styles.row}>
+                                    <View style={{width:'80%'}}>
+                                        <Title style={{color:Colors.activeText.default,marginLeft:10}}>{this.state.data.title}</Title>
+                                        <View style={styles.row}>
+                                            <Text style={{color:Colors.dimActiveText.default,marginLeft:10}}>Category: </Text>
+                                            <Text style={{color:Colors.activeText.default}}>{this.state.data.category.name}</Text>
+                                        </View>
+                                    </View>
+                                    <View style={{width:'40%',justifyContent:'center',alignItems:'center'}}>
+                                        
+                                    </View>
+                                </View>
+                            </View>
+                            <FAB style={[styles.fab,{backgroundColor:Colors.activeText.default}]}
+                                icon='play-arrow'
+                                color='#1a1a1a'
+                                onPress={() => this._onPlay(this.state.data)}
+                            >
+                            </FAB>
+                        </View>
+                    </ImageBackground>
+                    <View style={styles.infoContainer}>
+                        <View style={styles.row}>
+                            <Title style={{color:Colors.activeText.default}}>
+                                Description :
+                            </Title>
+                            <Right>
+                                <Chip icon='add' color='#1a1a1a' style={{width:'auto',height:'auto',backgroundColor:Colors.activeAccentText.default}}>
+                                    <Text style={{color:'#1a1a1a'}}>WatchList</Text>
+                                </Chip>
+                            </Right>
+                        </View>
+                        <Paragraph style={[styles.paragraph,{color:Colors.activeText.default}]}>
+                            {this.state.data.description}
+                        </Paragraph>
+                        <View style={[styles.row,{marginTop:10}]}>
+                            <View style={[styles.row,{width:'50%'}]}>
+                                <View style={{width:'20%'}}>
+                                    <Ionicons name='ios-calendar' size={30} color={Colors.dimActiveText.default}/>
+                                </View>
+                                <View style={{width:'80%',justifyContent:'center'}}>
+                                    <Text style={{color:Colors.dimActiveText.default}}>Release Date</Text>
+                                    <Text style={{color:Colors.activeText.default}}>{this.state.data.date_release}</Text>
+                                </View>
+                            </View>
+                            <View style={[styles.row,{width:'50%'}]}>
+                                <View style={{width:'20%'}}>
+                                    <Ionicons name='ios-time' size={30} color={Colors.dimActiveText.default}/>
+                                </View>
+                                <View style={{width:'80%',justifyContent:'center'}}>
+                                    <Text style={{color:Colors.dimActiveText.default}}>Movie Length</Text>
+                                    <Text style={{color:Colors.activeText.default}}>{this.state.data.time}</Text>
+                                </View>
+                            </View>
+                        </View>
+                        <View style={[styles.row,{marginTop:10}]}>
+                            <View style={[styles.row,{width:'50%'}]}>
+                                <View style={{width:'20%', alignItems:'center',justifyContent:'center'}}>
+                                    <Ionicons name='ios-eye' size={30} color={Colors.dimActiveText.default}/>
+                                </View>
+                                <View style={{width:'80%',justifyContent:'center'}}>
+                                    <Text style={{color:Colors.activeText.default}}>{this.state.data.visits} Views</Text>
+                                </View>
+                            </View>
+                            <View style={[styles.row,{width:'50%',justifyContent:'center',alignItems:'center'}]}>
+                                <View style={{width:'20%'}}>
+                                    <Ionicons name='ios-happy' size={30} color={Colors.dimActiveText.default}/>
+                                </View>
+                                <View style={{width:'80%',justifyContent:'center'}}>
+                                    <Text style={{color:Colors.dimActiveText.default}}>Genre</Text>
+                                    <FlatList
+                                        data={this.state.data.genres}
+                                        keyExtractor={({item})=>'item'}
+                                        renderItem={({item})=>
+                                            <Text style={{color:Colors.activeText.default}}>{`${item.name}`}</Text>
+                                        }
+                                    />
+                                </View>
+                            </View>
+                        </View>
+                        <View>
+                            <Title style={{color:Colors.activeText.default}}>
+                                Related :
+                            </Title>
+                            <RelatedMovies />
+                        </View>
+                    </View>
